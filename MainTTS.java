@@ -16,12 +16,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.concurrent.TimeUnit;
+import java.lang.Thread;
 
 public class MainTTS extends AppCompatActivity {
     Timer t = new Timer();
+    TTS lettuce = new TTS();
 
     private TextToSpeech mTTS;
-    private EditText mEditText;
     private Button mButtonSpeak;
     private TextView txvResult;
     private String[] test = new String[10];
@@ -32,7 +33,6 @@ public class MainTTS extends AppCompatActivity {
         setContentView(R.layout.activity_main_tts);
         mButtonSpeak = findViewById(R.id.button_speak);
         txvResult = (TextView) findViewById(R.id.txvResult);
-
         mTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -52,11 +52,10 @@ public class MainTTS extends AppCompatActivity {
         });
 
 
-        mEditText = findViewById(R.id.edit_text);
-
         mButtonSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                lettuce.start(mTTS);
                 speak();
             }
         });
@@ -65,8 +64,6 @@ public class MainTTS extends AppCompatActivity {
 
 
     private void speak() {
-
-
         test[0] = "hello";
         test[1] = "there";
         test[2] = "How you";
@@ -110,6 +107,10 @@ public class MainTTS extends AppCompatActivity {
     public void getTurd(View view) {
 
         getSpeechInput();
+
+    }
+
+    public void SpeechToText(){
 
     }
 
