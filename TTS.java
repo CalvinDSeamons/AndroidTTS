@@ -8,6 +8,7 @@ public class TTS extends Thread{
     String threadName = "";
     Thread t;
     private TextToSpeech mTTS;
+    String phrase = "";
 
 
 
@@ -19,23 +20,28 @@ public class TTS extends Thread{
 
     @Override
     public void run() {
-        System.out.println("Hello Thread?");
-        String test = "beep beep beep beep beep beep beep beep beep beep beep beep beep beep beep beep beep beep";
-            mTTS.speak(test, TextToSpeech.QUEUE_FLUSH, null);
+
+                mTTS.speak(phrase, TextToSpeech.QUEUE_FLUSH, null);
+                System.out.println("Greetings");
+
+
 
     }
 
 
-    public void start(TextToSpeech mTTSin){
+    public void start(TextToSpeech mTTSin, String phrase_in){
         mTTS = mTTSin;
+        phrase = phrase_in;
+
+
         System.out.println("Starting " +  threadName );
         if (t == null) {
             t = new Thread (this, threadName);
             t.start();
         }
-
+        else{
+            t.run();
+        }
     }
-
-
 
 }
